@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `digimarket_sprint_4` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `digimarket_sprint_4` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `digimarket_sprint_4`;
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
@@ -61,12 +61,13 @@ CREATE TABLE `contact_us` (
   `contact_us_organization_id` int DEFAULT NULL,
   `created_by` int DEFAULT NULL,
   `created_date` varchar(45) DEFAULT NULL,
+  `is_archived` bit(1) DEFAULT NULL,
   PRIMARY KEY (`contact_us_id`),
   KEY `contact_us_organization_id_idx` (`contact_us_organization_id`),
   KEY `contact_us_created_by_idx` (`created_by`),
   CONSTRAINT `contact_us_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `contact_us_organization_id` FOREIGN KEY (`contact_us_organization_id`) REFERENCES `organization` (`organization_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +98,7 @@ CREATE TABLE `course` (
   KEY `course_created_by_idx` (`created_by`),
   CONSTRAINT `course_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `course_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +127,7 @@ CREATE TABLE `course_lesson` (
   KEY `course_lesson_user_content_id_idx` (`user_content_id`),
   CONSTRAINT `course_lesson_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   CONSTRAINT `course_lesson_user_content_id` FOREIGN KEY (`user_content_id`) REFERENCES `user_content` (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +159,7 @@ CREATE TABLE `course_location` (
   KEY `course_location_created_by_idx` (`created_by`),
   CONSTRAINT `course_location_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `course_location_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +192,7 @@ CREATE TABLE `course_schedule` (
   CONSTRAINT `course_schedule_course_id` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`),
   CONSTRAINT `course_schedule_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `course_schedule_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +226,7 @@ CREATE TABLE `course_schedule_attendance` (
   CONSTRAINT `course_schedule_attendance_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `course_schedule_attendance_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `course_schedule_course_details_id` FOREIGN KEY (`course_schedule_course_details_id`) REFERENCES `course_schedule_course_details` (`course_schedule_course_details_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,7 +263,7 @@ CREATE TABLE `course_schedule_course_details` (
   CONSTRAINT `course_schedule_course_details_location_id` FOREIGN KEY (`location_id`) REFERENCES `course_location` (`course_location_id`),
   CONSTRAINT `course_schedule_course_details_teacher_id` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `course_schedule_course_details_user_content_id` FOREIGN KEY (`user_content_id`) REFERENCES `user_content` (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,7 +293,7 @@ CREATE TABLE `course_schedule_members` (
   KEY `course_schedule_member_user_id_idx` (`user_id`),
   CONSTRAINT `course_schedule_details` FOREIGN KEY (`course_schedule_course_details`) REFERENCES `course_schedule_course_details` (`course_schedule_course_details_id`),
   CONSTRAINT `course_schedule_member_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +322,7 @@ CREATE TABLE `on_going_class_for_user` (
   KEY `on_going_class_for_user_user_id_idx` (`user_id`),
   CONSTRAINT `on_going_class_for_user_course_schedule_course_details_id` FOREIGN KEY (`course_schedule_course_details_id`) REFERENCES `course_schedule_course_details` (`course_schedule_course_details_id`),
   CONSTRAINT `on_going_class_for_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -604,7 +605,7 @@ CREATE TABLE `role` (
   KEY `role_created_by_idx` (`created_by`),
   CONSTRAINT `role_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `role_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=973 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=973 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -637,7 +638,7 @@ CREATE TABLE `role_permission` (
   CONSTRAINT `permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`permission_id`),
   CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
   CONSTRAINT `role_permission_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -673,7 +674,7 @@ CREATE TABLE `specific_user_prmission` (
   CONSTRAINT `specific_user_prmission_approved_by` FOREIGN KEY (`approved_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `specific_user_prmission_content_id` FOREIGN KEY (`content_id`) REFERENCES `user_content` (`content_id`),
   CONSTRAINT `specific_user_prmission_request_by` FOREIGN KEY (`request_by`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -810,7 +811,7 @@ CREATE TABLE `user_content` (
   CONSTRAINT `duplicated_from` FOREIGN KEY (`duplicated_from`) REFERENCES `user_content` (`content_id`),
   CONSTRAINT `organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=236 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=236 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -844,7 +845,7 @@ CREATE TABLE `user_content_access_request` (
   KEY `user_content_access_request_requested_by_idx` (`request_by`),
   CONSTRAINT `user_content_access_request_content_id` FOREIGN KEY (`content_id`) REFERENCES `user_content` (`content_id`),
   CONSTRAINT `user_content_access_request_requested_by` FOREIGN KEY (`request_by`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -874,7 +875,7 @@ CREATE TABLE `user_content_attachments` (
   KEY `attachments_created_by_idx` (`created_by`),
   CONSTRAINT `attachments_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `attachments_user_content_id` FOREIGN KEY (`user_content_id`) REFERENCES `user_content` (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -903,7 +904,7 @@ CREATE TABLE `user_content_meta` (
   PRIMARY KEY (`user_content_meta_id`),
   KEY `user_content_id_idx` (`content_id`),
   CONSTRAINT `user_content_id` FOREIGN KEY (`content_id`) REFERENCES `user_content` (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -937,7 +938,7 @@ CREATE TABLE `user_content_question` (
   KEY `user_content_question_created_by_idx` (`created_by`),
   CONSTRAINT `user_content_question_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `user_content_question_user_content_id` FOREIGN KEY (`user_content_id`) REFERENCES `user_content` (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -969,7 +970,7 @@ CREATE TABLE `user_content_scratch_project` (
   KEY `user_content_scratch_project_content_id_idx` (`user_content_id`),
   CONSTRAINT `user_content_scratch_project_content_id` FOREIGN KEY (`user_content_id`) REFERENCES `user_content` (`content_id`),
   CONSTRAINT `user_content_scratch_project_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1002,7 +1003,7 @@ CREATE TABLE `user_content_sharing_permissions` (
   PRIMARY KEY (`user_content_sharing_permissions_id`),
   KEY `permissions_user_content_id_idx` (`permissions_user_content_id`),
   CONSTRAINT `permissions_user_content_id` FOREIGN KEY (`permissions_user_content_id`) REFERENCES `user_content` (`content_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1115,7 +1116,7 @@ CREATE TABLE `user_organization_emails` (
   KEY `user_organization_email_organization_id_idx` (`organization_id`),
   CONSTRAINT `user_organization_email_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`),
   CONSTRAINT `user_organization_email_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1148,7 +1149,7 @@ CREATE TABLE `user_organization_role` (
   CONSTRAINT `user_oganization_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
   CONSTRAINT `user_organization_id` FOREIGN KEY (`user_organization_id`) REFERENCES `user_organization` (`user_organization_id`),
   CONSTRAINT `user_organization_role_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1253,7 +1254,7 @@ CREATE TABLE `user_request` (
   CONSTRAINT `user_request_rejected_by` FOREIGN KEY (`rejected_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `user_request_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
   CONSTRAINT `user_request_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1296,7 +1297,7 @@ CREATE TABLE `username_login_student` (
   CONSTRAINT `username_login_student_created_by` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
   CONSTRAINT `username_login_student_link_parent_id` FOREIGN KEY (`link_parent_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `username_login_student_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1325,7 +1326,7 @@ CREATE TABLE `username_login_student_organization` (
   KEY `username_login_student_organization_organization_id_idx` (`organization_id`),
   CONSTRAINT `username_login_student_id` FOREIGN KEY (`username_login_student_id`) REFERENCES `username_login_student` (`username_login_student_id`),
   CONSTRAINT `username_login_student_organization_organization_id` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`organization_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
