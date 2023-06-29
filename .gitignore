@@ -34,10 +34,8 @@ yarn.lock
 commit.sh
 
 /DigiMarketWebApi/Properties/PublishProfiles
-/DigiMarketWebApi/.vs/DigiMarket/FileContentIndex
-/DigiMarketWebApi/.vs/DigiMarket/v17
-/DigiMarketWebApi/.vs/ProjectEvaluation
+*/.vs
 /socket-io-server
-DigiMarketWebApi/.vs/DigiMarket/DesignTimeBuild/.dtbcache.v2
 /.vs
 /obj
+*/.config
