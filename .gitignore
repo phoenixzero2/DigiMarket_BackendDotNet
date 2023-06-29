@@ -40,3 +40,4 @@ commit.sh
 /socket-io-server
 DigiMarketWebApi/.vs/DigiMarket/DesignTimeBuild/.dtbcache.v2
 /.vs
+/obj
