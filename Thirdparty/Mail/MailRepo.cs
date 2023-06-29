@@ -34,7 +34,8 @@ namespace Thirdparty.Mail
             {
                 smtpClient.Host = _mailSettings.Host;
                 smtpClient.Port = _mailSettings.Port;
-                smtpClient.EnableSsl = false;
+                smtpClient.EnableSsl = true;
+                //smtpClient.UseDefaultCredentials = true;
                 smtpClient.Credentials = new NetworkCredential(_mailSettings.Username, _mailSettings.Password);
                 smtpClient.Send(email);
             }
